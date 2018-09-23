@@ -1,0 +1,4 @@
+v 3
+file / "/Users/pedrofrancesconcittolin/Documents/UTFPR/Subjects/Arquitetura de Computadores/GHDL/lab_3_regs/mux16bits.vhd" "20180921190156.000" "20180921160157.076":
+  entity mux16bits at 1( 0) + 0 on 11;
+  architecture a_mux16bits of mux16bits at 18( 545) + 0 on 12;
