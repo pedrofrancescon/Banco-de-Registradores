@@ -16,7 +16,7 @@ entity bank8regs is
 end entity;
 
 architecture a_bank8regs of bank8regs is
-	
+
 	component reg16bits
 	    port( clk: in std_logic;
 		  rst: in std_logic;
@@ -26,8 +26,8 @@ architecture a_bank8regs of bank8regs is
 		);
     end component;
 
-    component mux16bits 
-    	port(   entr0 : in unsigned(15 downto 0);
+    component mux16bits
+    	port(entr0 : in unsigned(15 downto 0);
 			 entr1 : in unsigned(15 downto 0);
 			 entr2 : in unsigned(15 downto 0);
 			 entr3 : in unsigned(15 downto 0);
@@ -35,8 +35,19 @@ architecture a_bank8regs of bank8regs is
 			 entr5 : in unsigned(15 downto 0);
 			 entr6 : in unsigned(15 downto 0);
 			 entr7 : in unsigned(15 downto 0);
-			 sel : in unsigned(2 downto 0); 
+			 sel : in unsigned(2 downto 0);
 			 saida : out unsigned(15 downto 0));
     end component;
+
+	component ula
+		port (entr0 : in unsigned(15 downto 0);
+	    	  entr1 : in unsigned(15 downto 0);
+	    	  sel : in unsigned(1 downto 0);
+	    	  result : out unsigned(15 downto 0);
+	    	  maiorIgual : out std_logic );
+	end component;
+
+	begin
+		lua: ula
 
 end architecture;
