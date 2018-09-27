@@ -39,15 +39,17 @@ architecture a_bank8regs of bank8regs is
 			 saida : out unsigned(15 downto 0));
     end component;
 
-	component ula
-		port (entr0 : in unsigned(15 downto 0);
-	    	  entr1 : in unsigned(15 downto 0);
-	    	  sel : in unsigned(1 downto 0);
-	    	  result : out unsigned(15 downto 0);
-	    	  maiorIgual : out std_logic );
-	end component;
-
-	begin
-		lua: ula
+	begin --como difeerenciar variaveis de mesmo nome na arquitetura e no componente
+		r0: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
+		r1: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
+		r2: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
+		r3: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
+		r4: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
+		r5: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
+		r6: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
+		r7: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
+		--eu devo fazer com flexinha indo ou voltando?
+		mux1: mux16bits port map(entr0<=, entr1<=, entr2<=, entr3<=, entr4<=, entr5<=, entr6<=, entr7<=, sel<=, saida<=);
+		mux2: mux16bits port map(entr0<=, entr1<=, entr2<=, entr3<=, entr4<=, entr5<=, entr6<=, entr7<=, sel<=, saida<=);
 
 end architecture;
