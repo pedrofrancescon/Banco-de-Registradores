@@ -13,22 +13,23 @@ architecture a_circ_tb of circ_tb is
 	    	   result : out unsigned(15 downto 0);
 	    	   maiorIgual : out std_logic);
     end component;
+
 	component bank8regs
-		port ( selOut1: in unsigned(2 downto 0);
-			   selOut2: in unsigned(2 downto 0);
-			   dataIn: in unsigned(15 downto 0);
-			   selIn: in unsigned(2 downto 0);
-			   wr_en: in std_logic;
-			   clk: in std_logic;
-			   rst: in std_logic;
-			   out1: out unsigned(15 downto 0);
-			   out2: out unsigned(15 downto 0)
-		);
+		port(   saida0 : out unsigned(15 downto 0);
+				saida1 : out unsigned(15 downto 0);
+			 	saida2 : out unsigned(15 downto 0);
+			 	saida3 : out unsigned(15 downto 0);
+			 	saida4 : out unsigned(15 downto 0);
+			 	saida5 : out unsigned(15 downto 0);
+			 	saida6 : out unsigned(15 downto 0);
+			 	saida7 : out unsigned(15 downto 0);
+			 	sel : in unsigned(2 downto 0); 
+			 	entrada : in unsigned(15 downto 0)
+			 );
 	end component;
 
     signal sel: unsigned(1 downto 0);
     signal maiorIgual: std_logic;
     signal entr0,entr1,result: unsigned(15 downto 0);
-
 
 end architecture;

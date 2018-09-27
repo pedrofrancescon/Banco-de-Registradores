@@ -39,17 +39,39 @@ architecture a_bank8regs of bank8regs is
 			 saida : out unsigned(15 downto 0));
     end component;
 
-	begin --como difeerenciar variaveis de mesmo nome na arquitetura e no componente
-		r0: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
-		r1: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
-		r2: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
-		r3: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
-		r4: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
-		r5: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
-		r6: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
-		r7: reg16bits port map( rst =>rst, wr_en=>wr_en , data_in=>data_in , data_out=>data_out);
-		--eu devo fazer com flexinha indo ou voltando?
-		mux1: mux16bits port map(entr0<=, entr1<=, entr2<=, entr3<=, entr4<=, entr5<=, entr6<=, entr7<=, sel<=, saida<=);
-		mux2: mux16bits port map(entr0<=, entr1<=, entr2<=, entr3<=, entr4<=, entr5<=, entr6<=, entr7<=, sel<=, saida<=);
+    component demux1bit
+    	 port(  saida0 : out std_logic;
+			 	saida1 : out std_logic;
+			 	saida2 : out std_logic;
+			 	saida3 : out std_logic;
+			 	saida4 : out std_logic;
+			 	saida5 : out std_logic;
+			 	saida6 : out std_logic;
+			 	saida7 : out std_logic;
+			 	sel : in unsigned(2 downto 0); 
+    end component;
+
+    signal wr_en, clk, rst: std_logic;
+    signal selOut1, selOut2, selIn: unsigned(2 downto 0);
+    signal data_in, out1, out2: unsigned(15 downto 0);
+
+    signal en0,en1,en2,en3,en4,en5,en6,en7: unsigned(15 downto 0);
+    signal out0,out1,out2,out3,out4,out5,out6,out7: unsigned(15 downto 0);
+
+	begin 
+
+		demuxIn: demux16bits port map( saida0=>en0 , saida1=>en1 , saida2=>en2 , saida3=>en3 , saida4=>en4 , saida5=>en5 , saida6=>en6 , saida7=>en7 , sel=>selIn );
+
+		r0: reg16bits port map( rst=>rst , wr_en=>en0 , data_in=>data_in , data_out=>out0 , clk=>clk );
+		r1: reg16bits port map( rst=>rst , wr_en=>en1 , data_in=>data_in , data_out=>out1 , clk=>clk );
+		r2: reg16bits port map( rst=>rst , wr_en=>en2 , data_in=>data_in , data_out=>out2 , clk=>clk );
+		r3: reg16bits port map( rst=>rst , wr_en=>en3 , data_in=>data_in , data_out=>out3 , clk=>clk );
+		r4: reg16bits port map( rst=>rst , wr_en=>en4 , data_in=>data_in , data_out=>out4 , clk=>clk );
+		r5: reg16bits port map( rst=>rst , wr_en=>en5 , data_in=>data_in , data_out=>out5 , clk=>clk );
+		r6: reg16bits port map( rst=>rst , wr_en=>en6 , data_in=>data_in , data_out=>out6 , clk=>clk );
+		r7: reg16bits port map( rst=>rst , wr_en=>en7 , data_in=>data_in , data_out=>out7 , clk=>clk );
+		
+		mux1Out: mux16bits port map( entr0=> , entr1=> , entr2=> , entr3=> , entr4=> , entr5=> , entr6=> , entr7=> , sel=> , saida=> );
+		mux2Out: mux16bits port map( entr0=> , entr1=> , entr2=> , entr3=> , entr4=> , entr5=> , entr6=> , entr7=> , sel=> , saida=> );
 
 end architecture;
