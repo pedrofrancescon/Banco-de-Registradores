@@ -11,7 +11,9 @@ entity demux1bit is
 			 saida5 : out std_logic;
 			 saida6 : out std_logic;
 			 saida7 : out std_logic;
-			 sel : in unsigned(2 downto 0));
+			 sel : in unsigned(2 downto 0);
+			 enable : std_logic
+			 );
 end entity;
 
 architecture a_demux1bit of demux1bit is

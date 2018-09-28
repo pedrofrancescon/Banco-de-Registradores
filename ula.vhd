@@ -18,6 +18,6 @@ begin
  			 		   entr0 or entr1 when sel = "11" else
  			 		  "0000000000000000"; -- saida 16 bits -> 16 zeros
 
- 			 maiorIgual <= '1' when in1 > in2 else
+ 			 maiorIgual <= '1' when entr0 > entr1 else
  			 			   '0';
 end architecture;

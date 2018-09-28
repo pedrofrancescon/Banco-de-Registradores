@@ -22,7 +22,7 @@ architecture a_bank8regs of bank8regs is
 		  	  rst: in std_logic;
 		  	  wr_en: in std_logic;
 		  	  data_in: in unsigned(15 downto 0);
-		  	  data_out: in unsigned(15 downto 0)
+		  	  data_out: out unsigned(15 downto 0)
 			);
     end component;
 
@@ -49,16 +49,17 @@ architecture a_bank8regs of bank8regs is
 			 	saida5 : out std_logic;
 			 	saida6 : out std_logic;
 			 	saida7 : out std_logic;
-			 	sel : in unsigned(2 downto 0); 
+			 	sel : in unsigned(2 downto 0);
 			 	enable : std_logic
 			 );
     end component;
 
-    signal en0,en1,en2,en3,en4,en5,en6,en7, out_0,out_1,out_2,out_3,out_4,out_5,out_6,out_7: unsigned(15 downto 0);
+    signal en0,en1,en2,en3,en4,en5,en6,en7: std_logic;
+	signal out_0,out_1,out_2,out_3,out_4,out_5,out_6,out_7, data_in: unsigned(15 downto 0);
 
-	begin 
+	begin
 
-		demuxIn: demux16bits port map( saida0=>en0 , saida1=>en1 , saida2=>en2 , saida3=>en3 , saida4=>en4 , saida5=>en5 , saida6=>en6 , saida7=>en7 , sel=>selIn , enable=>wr_en );
+		demuxIn: demux1bit port map( saida0=>en0 , saida1=>en1 , saida2=>en2 , saida3=>en3 , saida4=>en4 , saida5=>en5 , saida6=>en6 , saida7=>en7 , sel=>selIn , enable=>wr_en );
 
 		r0: reg16bits port map( rst=>rst , wr_en=>en0 , data_in=>data_in , data_out=>out_0 , clk=>clk );
 		r1: reg16bits port map( rst=>rst , wr_en=>en1 , data_in=>data_in , data_out=>out_1 , clk=>clk );
@@ -68,7 +69,7 @@ architecture a_bank8regs of bank8regs is
 		r5: reg16bits port map( rst=>rst , wr_en=>en5 , data_in=>data_in , data_out=>out_5 , clk=>clk );
 		r6: reg16bits port map( rst=>rst , wr_en=>en6 , data_in=>data_in , data_out=>out_6 , clk=>clk );
 		r7: reg16bits port map( rst=>rst , wr_en=>en7 , data_in=>data_in , data_out=>out_7 , clk=>clk );
-		
+
 		mux1Out: mux16bits port map( entr0=>out_0 , entr1=>out_1 , entr2=>out_2 , entr3=>out_3 , entr4=>out_4 , entr5=>out_5 , entr6=>out_6 , entr7=>out_7 , sel=>selOut1 , saida=>out1 );
 		mux2Out: mux16bits port map( entr0=>out_0 , entr1=>out_1 , entr2=>out_2 , entr3=>out_3 , entr4=>out_4 , entr5=>out_5 , entr6=>out_6 , entr7=>out_7 , sel=>selOut2 , saida=>out2 );
 
