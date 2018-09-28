@@ -11,25 +11,57 @@ architecture a_circ_tb of circ_tb is
 	    	   entr1 : in unsigned(15 downto 0);
 	    	   sel : in unsigned(1 downto 0);
 	    	   result : out unsigned(15 downto 0);
-	    	   maiorIgual : out std_logic);
+	    	   maiorIgual : out std_logic
+	    	   );
     end component;
 
 	component bank8regs
-		port(   saida0 : out unsigned(15 downto 0);
-				saida1 : out unsigned(15 downto 0);
-			 	saida2 : out unsigned(15 downto 0);
-			 	saida3 : out unsigned(15 downto 0);
-			 	saida4 : out unsigned(15 downto 0);
-			 	saida5 : out unsigned(15 downto 0);
-			 	saida6 : out unsigned(15 downto 0);
-			 	saida7 : out unsigned(15 downto 0);
-			 	sel : in unsigned(2 downto 0); 
-			 	entrada : in unsigned(15 downto 0)
-			 );
+		port ( selOut1: in unsigned(2 downto 0);
+		   	   selOut2: in unsigned(2 downto 0);
+		   	   dataIn: in unsigned(15 downto 0);
+		   	   selIn: in unsigned(2 downto 0);
+		   	   wr_en: in std_logic;
+		   	   clk: in std_logic;
+		   	   rst: in std_logic;
+		   	   out1: out unsigned(15 downto 0);
+		   	   out2: out unsigned(15 downto 0)
+			   );
 	end component;
 
-    signal sel: unsigned(1 downto 0);
-    signal maiorIgual: std_logic;
-    signal entr0,entr1,result: unsigned(15 downto 0);
+	component mux16bits2in
+		port(   entr0 : in unsigned(15 downto 0);
+			 	entr1 : in unsigned(15 downto 0);
+			 	sel : in unsigned(1 downto 0); 
+			 	saida : out unsigned(15 downto 0)
+			 );
+	end component;	
+
+    signal outUla: unsigned(15 downto 0);
+    signal outBank1, outBank2, outMux: unsigned(15 downto 0);
+
+    signal selBankOut1, selBankOut1
+
+    	begin 
+
+    	ula: ula port map ( entr0=> outBank1,
+    						entr1=> outMux,
+    						sel=> ,
+    						result=> outUla,
+    						maiorIgual=> );
+
+    	bank8regs: bank8regs port map ( selOut1=> ,
+    									selOut2=> ,
+    									dataIn=> outUla,
+    									selIn=> ,
+    									wr_en=> ,
+    									clk=> ,
+    									rst=> ,
+    									out1=> outBank1,
+    									out2=> outBank2);
+
+    	mux: mux16bits2in port map ( entr0=> outBank2,
+    								 entr1=> ,
+    								 sel=> ,
+    								 saida=> outMux);
 
 end architecture;

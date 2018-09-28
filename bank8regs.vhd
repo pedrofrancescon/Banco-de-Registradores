@@ -51,27 +51,23 @@ architecture a_bank8regs of bank8regs is
 			 	sel : in unsigned(2 downto 0); 
     end component;
 
-    signal wr_en, clk, rst: std_logic;
-    signal selOut1, selOut2, selIn: unsigned(2 downto 0);
-    signal data_in, data_out1, data_out2: unsigned(15 downto 0);
-
     signal en0,en1,en2,en3,en4,en5,en6,en7: unsigned(15 downto 0);
-    signal out0,out1,out2,out3,out4,out5,out6,out7: unsigned(15 downto 0);
+    signal out_0,out_1,out_2,out_3,out_4,out_5,out_6,out_7: unsigned(15 downto 0);
 
 	begin 
 
 		demuxIn: demux16bits port map( saida0=>en0 , saida1=>en1 , saida2=>en2 , saida3=>en3 , saida4=>en4 , saida5=>en5 , saida6=>en6 , saida7=>en7 , sel=>selIn );
 
-		r0: reg16bits port map( rst=>rst , wr_en=>en0 , data_in=>data_in , data_out=>out0 , clk=>clk );
-		r1: reg16bits port map( rst=>rst , wr_en=>en1 , data_in=>data_in , data_out=>out1 , clk=>clk );
-		r2: reg16bits port map( rst=>rst , wr_en=>en2 , data_in=>data_in , data_out=>out2 , clk=>clk );
-		r3: reg16bits port map( rst=>rst , wr_en=>en3 , data_in=>data_in , data_out=>out3 , clk=>clk );
-		r4: reg16bits port map( rst=>rst , wr_en=>en4 , data_in=>data_in , data_out=>out4 , clk=>clk );
-		r5: reg16bits port map( rst=>rst , wr_en=>en5 , data_in=>data_in , data_out=>out5 , clk=>clk );
-		r6: reg16bits port map( rst=>rst , wr_en=>en6 , data_in=>data_in , data_out=>out6 , clk=>clk );
-		r7: reg16bits port map( rst=>rst , wr_en=>en7 , data_in=>data_in , data_out=>out7 , clk=>clk );
+		r0: reg16bits port map( rst=>rst , wr_en=>en0 , data_in=>data_in , data_out=>out_0 , clk=>clk );
+		r1: reg16bits port map( rst=>rst , wr_en=>en1 , data_in=>data_in , data_out=>out_1 , clk=>clk );
+		r2: reg16bits port map( rst=>rst , wr_en=>en2 , data_in=>data_in , data_out=>out_2 , clk=>clk );
+		r3: reg16bits port map( rst=>rst , wr_en=>en3 , data_in=>data_in , data_out=>out_3 , clk=>clk );
+		r4: reg16bits port map( rst=>rst , wr_en=>en4 , data_in=>data_in , data_out=>out_4 , clk=>clk );
+		r5: reg16bits port map( rst=>rst , wr_en=>en5 , data_in=>data_in , data_out=>out_5 , clk=>clk );
+		r6: reg16bits port map( rst=>rst , wr_en=>en6 , data_in=>data_in , data_out=>out_6 , clk=>clk );
+		r7: reg16bits port map( rst=>rst , wr_en=>en7 , data_in=>data_in , data_out=>out_7 , clk=>clk );
 		
-		mux1Out: mux16bits port map( entr0=>out0 , entr1=>out1 , entr2=>out2 , entr3=>out3 , entr4=>out4 , entr5=>out5 , entr6=>out6 , entr7=>out7 , sel=>selOut1 , saida=>data_out1 );
-		mux2Out: mux16bits port map( entr0=>out0 , entr1=>out1 , entr2=>out2 , entr3=>out3 , entr4=>out4 , entr5=>out5 , entr6=>out6 , entr7=>out7 , sel=>selOut2 , saida=>data_out2 );
+		mux1Out: mux16bits port map( entr0=>out_0 , entr1=>out_1 , entr2=>out_2 , entr3=>out_3 , entr4=>out_4 , entr5=>out_5 , entr6=>out_6 , entr7=>out_7 , sel=>selOut1 , saida=>out1 );
+		mux2Out: mux16bits port map( entr0=>out_0 , entr1=>out_1 , entr2=>out_2 , entr3=>out_3 , entr4=>out_4 , entr5=>out_5 , entr6=>out_6 , entr7=>out_7 , sel=>selOut2 , saida=>out2 );
 
 end architecture;
