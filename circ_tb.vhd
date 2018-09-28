@@ -44,13 +44,13 @@ architecture a_circ_tb of circ_tb is
 
     	begin
 
-    	ula: ula port map ( entr0=> outBank1,
+    	lua: ula port map ( entr0=> outBank1,
     						entr1=> outMux,
     						sel=> selUla,
     						result=> outUla,
     						maiorIgual=> maiorIgual);
 
-    	bank8regs: bank8regs port map ( selOut1=> selBankOut1,
+    	banco: bank8regs port map ( selOut1=> selBankOut1,
     									selOut2=> selBankOut2,
     									dataIn=> outUla,
     									selIn=> selBankIn,
@@ -93,7 +93,7 @@ architecture a_circ_tb of circ_tb is
 		selBankIn <= "000";
 		selUla <= "00";
 		selMux <= "00";
-		wr_en <= 0;
+		wr_en <= '0';
 		wait for 100 ns;
 		outUla <= "0000000000000001";
 		outBank1 <= "0000000000000010";
