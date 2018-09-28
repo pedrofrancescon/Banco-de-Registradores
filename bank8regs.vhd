@@ -19,11 +19,11 @@ architecture a_bank8regs of bank8regs is
 
 	component reg16bits
 	    port( clk: in std_logic;
-		  rst: in std_logic;
-		  wr_en: in std_logic;
-		  data_in: in unsigned(15 downto 0);
-		  data_out: in unsigned(15 downto 0)
-		);
+		  	  rst: in std_logic;
+		  	  wr_en: in std_logic;
+		  	  data_in: in unsigned(15 downto 0);
+		  	  data_out: in unsigned(15 downto 0)
+			);
     end component;
 
     component mux16bits
@@ -53,7 +53,7 @@ architecture a_bank8regs of bank8regs is
 
     signal wr_en, clk, rst: std_logic;
     signal selOut1, selOut2, selIn: unsigned(2 downto 0);
-    signal data_in, out1, out2: unsigned(15 downto 0);
+    signal data_in, data_out1, data_out2: unsigned(15 downto 0);
 
     signal en0,en1,en2,en3,en4,en5,en6,en7: unsigned(15 downto 0);
     signal out0,out1,out2,out3,out4,out5,out6,out7: unsigned(15 downto 0);
@@ -71,7 +71,7 @@ architecture a_bank8regs of bank8regs is
 		r6: reg16bits port map( rst=>rst , wr_en=>en6 , data_in=>data_in , data_out=>out6 , clk=>clk );
 		r7: reg16bits port map( rst=>rst , wr_en=>en7 , data_in=>data_in , data_out=>out7 , clk=>clk );
 		
-		mux1Out: mux16bits port map( entr0=> , entr1=> , entr2=> , entr3=> , entr4=> , entr5=> , entr6=> , entr7=> , sel=> , saida=> );
-		mux2Out: mux16bits port map( entr0=> , entr1=> , entr2=> , entr3=> , entr4=> , entr5=> , entr6=> , entr7=> , sel=> , saida=> );
+		mux1Out: mux16bits port map( entr0=>out0 , entr1=>out1 , entr2=>out2 , entr3=>out3 , entr4=>out4 , entr5=>out5 , entr6=>out6 , entr7=>out7 , sel=>selOut1 , saida=>data_out1 );
+		mux2Out: mux16bits port map( entr0=>out0 , entr1=>out1 , entr2=>out2 , entr3=>out3 , entr4=>out4 , entr5=>out5 , entr6=>out6 , entr7=>out7 , sel=>selOut2 , saida=>data_out2 );
 
 end architecture;
