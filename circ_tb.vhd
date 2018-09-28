@@ -36,32 +36,48 @@ architecture a_circ_tb of circ_tb is
 			 );
 	end component;	
 
-    signal outUla: unsigned(15 downto 0);
-    signal outBank1, outBank2, outMux: unsigned(15 downto 0);
+    signal outUla, outBank1, outBank2, outMux, inMux: unsigned(15 downto 0);
 
-    signal selBankOut1, selBankOut1
+    signal selBankOut1, selBankOut2, selBankIn: unsigned(2 downto 0);
+    signal selUla, selMux: unsigned(1 downto 0);
+    signal maiorIgual, wr_en, clk, rst: std_logic;
 
     	begin 
 
     	ula: ula port map ( entr0=> outBank1,
     						entr1=> outMux,
-    						sel=> ,
+    						sel=> selUla,
     						result=> outUla,
-    						maiorIgual=> );
+    						maiorIgual=> maiorIgual);
 
-    	bank8regs: bank8regs port map ( selOut1=> ,
-    									selOut2=> ,
+    	bank8regs: bank8regs port map ( selOut1=> selBankOut1,
+    									selOut2=> selBankOut2,
     									dataIn=> outUla,
-    									selIn=> ,
-    									wr_en=> ,
-    									clk=> ,
-    									rst=> ,
+    									selIn=> selBankIn,
+    									wr_en=> wr_en,
+    									clk=> clk,
+    									rst=> rst,
     									out1=> outBank1,
     									out2=> outBank2);
 
     	mux: mux16bits2in port map ( entr0=> outBank2,
-    								 entr1=> ,
-    								 sel=> ,
+    								 entr1=> inMux,
+    								 sel=> selMux,
     								 saida=> outMux);
+
+    	process
+		begin
+		
+		wait for 10 ns;
+		
+		wait for 10 ns;
+		
+		wait for 10 ns;
+		
+		wait for 10 ns;
+		
+		wait for 10 ns;
+		wait;
+		end process;
 
 end architecture;
