@@ -1,5 +1,5 @@
 library ieee;
-use ieee.std_logic_1164.all; 
+use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 
@@ -12,7 +12,7 @@ entity reg16bits is
 	);
 end entity;
 
-architecture a_reg8bits of reg8bits is 
+architecture a_reg16bits of reg16bits is
 	signal registro: unsigned(15 downto 0);
 begin
 	process(clk,rst,wr_en)
@@ -21,11 +21,10 @@ begin
 			registro <= "0000000000000000";
 		elsif wr_en='1' then
 			if rising_edge(clk) then
-				registro <= data_in; 
+				registro <= data_in;
 			end if;
-		end if; 
+		end if;
 	end process;
-
+	
 	data_out <= registro;
 end architecture;
-

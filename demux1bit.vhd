@@ -11,7 +11,7 @@ entity demux1bit is
 			 saida5 : out std_logic;
 			 saida6 : out std_logic;
 			 saida7 : out std_logic;
-			 sel : in unsigned(2 downto 0); 
+			 sel : in unsigned(2 downto 0));
 end entity;
 
 architecture a_demux1bit of demux1bit is
@@ -31,7 +31,7 @@ begin
 	 '0';
 	 saida6 <= '1' when sel="110" else
 	 '0';
-	 saida7 <= '1' when sel="111" else	  
+	 saida7 <= '1' when sel="111" else
 	 '0';
 
 end architecture;

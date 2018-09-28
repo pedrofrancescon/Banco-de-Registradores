@@ -31,10 +31,10 @@ architecture a_circ_tb of circ_tb is
 	component mux16bits2in
 		port(   entr0 : in unsigned(15 downto 0);
 			 	entr1 : in unsigned(15 downto 0);
-			 	sel : in unsigned(1 downto 0); 
+			 	sel : in unsigned(1 downto 0);
 			 	saida : out unsigned(15 downto 0)
 			 );
-	end component;	
+	end component;
 
     signal outUla, outBank1, outBank2, outMux, inMux: unsigned(15 downto 0);
 
@@ -42,7 +42,7 @@ architecture a_circ_tb of circ_tb is
     signal selUla, selMux: unsigned(1 downto 0);
     signal maiorIgual, wr_en, clk, rst: std_logic;
 
-    	begin 
+    	begin
 
     	ula: ula port map ( entr0=> outBank1,
     						entr1=> outMux,
@@ -67,17 +67,80 @@ architecture a_circ_tb of circ_tb is
 
     	process
 		begin
-		
-		wait for 10 ns;
-		
-		wait for 10 ns;
-		
-		wait for 10 ns;
-		
-		wait for 10 ns;
-		
-		wait for 10 ns;
+		clk <= '0';
+	    wait for 50 ns;
+	    clk <= '1';
+	    wait for 50 ns;
+	    end process;
+
+	    process -- sinal de reset
+	    begin
+	    rst <= '1';
+	    wait for 100 ns;
+	    rst <= '0';
+	    wait;
+	    end process;
+
+		process
+		begin
+		outUla <= "0000000000000001";
+		outBank1 <= "0000000000000010";
+		outBank2 <= "0000000000000011";
+		outMux <= "0000000000000100";
+		inMux <= "0000000000000101";
+		selBankOut1 <= "000";
+		selBankOut2 <= "000";
+		selBankIn <= "000";
+		selUla <= "00";
+		selMux <= "00";
+		wr_en <= 0;
+		wait for 100 ns;
+		outUla <= "0000000000000001";
+		outBank1 <= "0000000000000010";
+		outBank2 <= "0000000000000011";
+		outMux <= "0000000000000100";
+		inMux <= "0000000000000101";
+		selBankOut1 <= "001";
+		selBankOut2 <= "010";
+		selBankIn <= "011";
+		selUla <= "01";
+		selMux <= "01";
+		wait for 100 ns;
+		outUla <= "0000000000000001";
+		outBank1 <= "0000000000000010";
+		outBank2 <= "0000000000000011";
+		outMux <= "0000000000000100";
+		inMux <= "0000000000000101";
+		selBankOut1 <= "010";
+		selBankOut2 <= "100";
+		selBankIn <= "011";
+		selUla <= "10";
+		selMux <= "01";
+		wait for 100 ns;
+		outUla <= "0000000000000001";
+		outBank1 <= "0000000000000010";
+		outBank2 <= "0000000000000011";
+		outMux <= "0000000000000100";
+		inMux <= "0000000000000101";
+		selBankOut1 <= "110";
+		selBankOut2 <= "101";
+		selBankIn <= "001";
+		selUla <= "10";
+		selMux <= "11";
+		wait for 100 ns;
+		outUla <= "0000000000000001";
+		outBank1 <= "0000000000000010";
+		outBank2 <= "0000000000000011";
+		outMux <= "0000000000000100";
+		inMux <= "0000000000000101";
+		selBankOut1 <= "000";
+		selBankOut2 <= "100";
+		selBankIn <= "010";
+		selUla <= "00";
+		selMux <= "11";
+		wait for 100 ns;
 		wait;
 		end process;
+
 
 end architecture;
